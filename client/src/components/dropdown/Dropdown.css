@@ -1,0 +1,42 @@
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  gap: 30px;
+}
+
+.dropdown-header {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  height: 50px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px; /* 设置一个固定的宽度 */
+  max-height: 800px; /* 设置最大高度 */
+  overflow-y: auto; /* 超出最大高度时显示滚动条 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  background-color: #fff;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* 添加阴影效果 */
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
