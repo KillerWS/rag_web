@@ -15,7 +15,7 @@ const matchTypeMap=(input)=>{
   }
 export const getMessages =async(modelInfo, data)=>{
     // to do: 写一个根据模型名字映射成路由的函数
-    
+    console.log(modelInfo.model)
     try {
         
         const resData = await api.fetchMessages(modelInfo.model, matchTypeMap(modelInfo.personality), data);

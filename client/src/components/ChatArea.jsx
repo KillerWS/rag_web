@@ -66,8 +66,6 @@ const ChatArea = ({curModelInfo, modelParams}) => {
         
         //清除当前用户输入
         setUseInput('')
-        
-        
 
         const response = await getMessages(curModelInfo, {"query":useInput, "personalityType": matchTypeMap(curModelInfo.personality),
         //暂时没用到其他参数

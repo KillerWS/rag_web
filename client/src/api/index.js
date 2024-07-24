@@ -21,7 +21,8 @@ function matchModel(input) {
       "abab5.5-chat": "minimax",
       "abab5.5s-chat": "minimax",
       "glm-3-turbo": "zhipuai",
-      "glm-4": "zhipuai"
+      "glm-4": "zhipuai",
+      "Meta-llama3:8b": "llam3-8b"
     };
   
     // 检查输入字符串是否在映射对象中
@@ -38,7 +39,7 @@ const SYSTEMPROMPTAPI = axios.create({
     // }
 })
 
-export const fetchMessages=(modelName,personality , data)=> API.post(`/${matchModel(modelName)}/${modelName}/${personality}`, data, {
+export const fetchMessages=(modelName,personality , data)=> API.post(`/${matchModel(modelName)}`, data, {
     headers:{
         'Content-Type': 'application/json'
     }

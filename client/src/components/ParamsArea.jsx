@@ -19,14 +19,14 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
                         {"Baichuan2-53B":["百川","baichuan"]}, 
                         {"Baichuan2":["百川","baichuan"]},
                         {"abab5.5s-chat": ["MiniMax", "minimax"]},
-                        {"abab5.5-chat":["MiniMax", "minimax"]} ]
+                        {"abab5.5-chat":["MiniMax", "minimax"]}, 
+                        {"Meta-llama3:8b":["llama3:8b", "llama3:8b"]} ]
   
   const personality_type = [
     'E人AI',
     'I人AI',
     '通用AI',
   ]
-
 
   const dataModels1 = Object.keys(model_list1)
   const dataModels2 = Object.keys(model_list2)
@@ -55,8 +55,6 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
     }
 
     console.log(curModelInfo)
-  
-    
   };
 
   const handleKeyDown = (e) => {
