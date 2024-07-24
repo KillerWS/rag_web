@@ -99,26 +99,18 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
         {/* <form className="flex flex-col" onSubmit={handleSubmit}> */}
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <div className='p-4 my-4 text-lg font-semibold bg-green-500 w-full rounded text-center'>
-            <p className='my-4'>点击这里选择 模型 和 类型参数</p>
+            <p className='my-4'>Click to select model and type parameters</p>
             <div className="flex justify-between gap-6">
               <Dropdown title={"选择模型种类"} modelList={model_list2} onSelect={handleSelect} version={versionCode}/>
-              <Dropdown title={"选择人格类型"} curModelInfo ={curModelInfo} personalities={personality_type} onSelect={handleSelect} version={versionCode} />
             </div>
             
-            <div className="flex justify-between gap-5">
+           
               <div className="mt-4 p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <h5 className=" text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                   当前模型: {curModelInfo.model ? curModelInfo.model:'未选择'}
                 </h5>
-        
               </div>
-              <div className="mt-4 p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-              <h5 className=" text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                  当前人格: {curModelInfo.personality ? curModelInfo.personality:'未选择'}
-              </h5>
-      
-            </div>
-            </div>
+             
             
             {/* {selectedOption && <p className='mt-4'>当前模型: {selectedOption.model} + 当前人格：{selectedOption.personality} </p>}
            */}
@@ -127,8 +119,8 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
           
           {versionCode==='v2' &&
             <>
-           <p className="text-lg font-semibold text-gray-700">
-           请联系管理员开放模型参数调试接口
+           <p className="text-sm font-semibold text-gray-700">
+            <h1>Please contact the administrator to open the model parameter debugging interface</h1>
               </p>
           <div style={{ pointerEvents: 'none', opacity: 0.4 }}>
             
@@ -183,17 +175,14 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
           </div> </>}
           
           <label htmlFor="top_p" className="text-sm font-semibold text-gray-700">
-            <h1>提示：</h1>
-            <h2>1. Enter发送提示词， Shift + Enter换行</h2>
-            <h2>2. 输入框左侧图标清除历史信息</h2>
-            <h2>3. 请勿连续过快发送提示词</h2>
-            <h2>4. 模型参数调试接口暂未开放</h2>
-            <h2>5. 当前默认的模型记忆对话轮数为 4 </h2>
-            ...
+            <h1>Tips:</h1>
+            <h2>1. Enter to send prompt words, Shift + Enter to change lines</h2>
+            <h2>2. Click the icon on the left side of the input box to clear historical information</h2>
+            <h2>3. Do not send prompt words too quickly</h2>
+            <h2>4. The model parameter debugging interface is not open yet</h2>
+            {/* <h2>5. The current default model memory dialogue round number is 4 </h2>
+            ... */}
           </label>
-          
-          
-
         </form>
       </div>
   )
