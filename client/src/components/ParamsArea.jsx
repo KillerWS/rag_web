@@ -3,7 +3,50 @@ import Dropdown from './dropdown/Dropdown'
 import { Link } from 'react-router-dom';
 import { sendSystemPrompt } from '../services/messages';
 
+
+import { InboxOutlined } from '@ant-design/icons';
+import { message, Upload } from 'antd';
+
 const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}) => {
+  const { Dragger } = Upload;
+  const props = {
+    name: 'file',
+    multiple: true,
+    action: 'http://gpuserver.di.uminho.pt:36122/upload', // 修改为Flask服务器的UR
+    beforeUpload(file) {
+      //限制.txt和.pdf
+      const isTxtOrPdf = file.type === 'text/plain' || file.type === 'application/pdf';
+      if (!isTxtOrPdf) {
+        message.error('You can only upload .txt or .pdf files!');
+        return Upload.LIST_IGNORE;
+      }
+      //限制2M之内
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        message.error('File must be smaller than 2MB!');
+        return Upload.LIST_IGNORE;
+      }
+      return isTxtOrPdf && isLt2M;
+    },
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log('Dropped files', e.dataTransfer.files);
+    },
+    onError(err) {
+      message.error(`File upload failed: ${err.message}`);
+    },
+    
+  };
   const model_list1 = {
     "Qwen1.5-0.5B-Chat":"cuda:0",
     "Qwen1.5-0.5B-Chat-AWQ":"cuda:0",
@@ -99,13 +142,13 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
           <div className='p-4 my-4 text-lg font-semibold bg-green-500 w-full rounded text-center'>
             <p className='my-4'>Click to select model and type parameters</p>
             <div className="flex justify-between gap-6">
-              <Dropdown title={"选择模型种类"} modelList={model_list2} onSelect={handleSelect} version={versionCode}/>
+              <Dropdown title={"Select Model"} modelList={model_list2} onSelect={handleSelect} version={versionCode}/>
             </div>
             
            
               <div className="mt-4 p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <h5 className=" text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                  当前模型: {curModelInfo.model ? curModelInfo.model:'未选择'}
+                  Current Model: {curModelInfo.model ? curModelInfo.model:'No model'}
                 </h5>
               </div>
              
@@ -115,7 +158,7 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
           </div>
           
           
-          {versionCode==='v2' &&
+          {/* {versionCode==='v2' &&
             <>
            <p className="text-sm font-semibold text-gray-700">
             <h1>Please contact the administrator to open the model parameter debugging interface</h1>
@@ -170,8 +213,20 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
           >
             Press ⌘ Submit to apply
           </button>
-          </div> </>}
-          
+          </div> </>} */}
+            {/* 上传pdf */}
+           <Dragger {...props}>
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">
+              Supports single upload. Please upload your .txt or pdf file
+            </p>
+          </Dragger>
+
+
+
           <label htmlFor="top_p" className="text-sm font-semibold text-gray-700">
             <h1>Tips:</h1>
             <h2>1. Enter to send prompt words, Shift + Enter to change lines</h2>

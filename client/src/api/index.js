@@ -7,7 +7,8 @@ const TESTAPI = axios.create({baseURL:'https://shikimori.one/api'})
 
 const API = axios.create({
     // baseURL: 'http://82.156.30.42:5001'
-    baseURL: 'http://127.0.0.1:5001'
+    // baseURL: 'http://127.0.0.1:5001'
+    baseURL: 'http://gpuserver.di.uminho.pt:36122'
     // headers : {
     //     //Origin是一个安全头，报错：Refused to set unsafe header "Origin"
     //     'Origin': 'http://10.12.5.216:2001'
