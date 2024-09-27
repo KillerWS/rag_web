@@ -73,11 +73,14 @@ const ChatArea = ({curModelInfo, modelParams}) => {
         
         //const renderedData = JSON.parse(response)
         const renderedData = JSON.parse(response)
-        console.log(renderedData)
+        console.log("renderedData", renderedData)
         setAllMessages(prevMessages =>[...prevMessages, {
           id: allMessages.length+1,
-          text: renderedData.data,
+          text: renderedData?.data?.result,
           fromUser: false ,
+          source: renderedData?.data?.source_documents,
+          image_data: renderedData?.image_data,
+          eva_result: renderedData?.data?.eva,
         }])
         
         // console.log(`后端模拟返回的数据： ${response}`)

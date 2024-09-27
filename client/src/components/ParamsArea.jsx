@@ -3,11 +3,13 @@ import Dropdown from './dropdown/Dropdown'
 import { Link } from 'react-router-dom';
 import { sendSystemPrompt } from '../services/messages';
 
-
 import { InboxOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
+import { message, Upload, Button, Modal } from 'antd';
 
 const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}) => {
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState('Content of the modal');
   const { Dragger } = Upload;
   const props = {
     name: 'file',
@@ -135,6 +137,25 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
 
   }
 
+  const showModal = () => {
+    setOpen(true);
+  };
+
+ 
+
+  const handleOk = () => {
+    setModalText('The modal will be closed after two seconds');
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setOpen(false);
+  };
   return (
     <div className="flex-none w-1/4 bg-gray-100 p-4 border-r-2">
         {/* <form className="flex flex-col" onSubmit={handleSubmit}> */}
@@ -151,69 +172,8 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
                   Current Model: {curModelInfo.model ? curModelInfo.model:'No model'}
                 </h5>
               </div>
-             
-            
-            {/* {selectedOption && <p className='mt-4'>当前模型: {selectedOption.model} + 当前人格：{selectedOption.personality} </p>}
-           */}
           </div>
           
-          
-          {/* {versionCode==='v2' &&
-            <>
-           <p className="text-sm font-semibold text-gray-700">
-            <h1>Please contact the administrator to open the model parameter debugging interface</h1>
-              </p>
-          <div style={{ pointerEvents: 'none', opacity: 0.4 }}>
-            
-            <label htmlFor="top_p" className="text-sm font-semibold text-gray-700">
-            top_p: <span className=' text-red-500'> {modelFormParams.top_p}</span>
-            <input
-              type="range"
-              id="top_p"
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none mt-1"
-              min="0"
-              max="1"
-              step="0.05"
-              defaultValue="0.75"
-              //value = {modelFormParams.top_p}
-              onChange={(e)=>setModelFormParams({
-                ...modelFormParams, top_p:e.target.value
-              })}
-            />
-          </label>
-          <label htmlFor="temperature" className="text-sm font-semibold text-gray-700 mt-4">
-            temperature:<span className=' text-red-500'> {modelFormParams.temperature}</span> 
-            <input
-              type="range"
-              id="temperature"
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none mt-1"
-              min="0"
-              max="1"
-              step="0.05"
-              defaultValue="0.9"
-              //value = {modelFormParams.temperature}
-              onChange={(e)=>setModelFormParams({
-                ...modelFormParams, temperature:e.target.value
-              })}
-            />
-          </label>
-          <div className="mt-4 p-2 bg-white rounded-lg shadow">
-            <p className="text-sm text-gray-500">System Prompt (Only for chat mode)</p>
-            <input
-              type="text"
-              value={systemPrompt}
-              onChange={handleInputChange}
-              placeholder="Answer with some emojis ONLY"
-              className="mt-1 p-2 bg-gray-50 border rounded w-full"
-            />
-          </div>
-          <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            //onClick={handleSubmit}
-            onKeyDown={handleKeyDown}
-          >
-            Press ⌘ Submit to apply
-          </button>
-          </div> </>} */}
             {/* 上传pdf */}
            <Dragger {...props}>
             <p className="ant-upload-drag-icon">
@@ -224,8 +184,20 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
               Supports single upload. Please upload your .txt or pdf file
             </p>
           </Dragger>
-
-
+          
+          <Button type="primary" onClick={showModal}>
+            Show knowledge base
+          </Button>
+          <Modal
+            title="Title"
+            open={open}
+            onOk={handleOk}
+            confirmLoading={confirmLoading}
+            onCancel={handleCancel}
+          >
+            <p>{modalText}</p>
+          </Modal>
+          
 
           <label htmlFor="top_p" className="text-sm font-semibold text-gray-700">
             <h1>Tips:</h1>

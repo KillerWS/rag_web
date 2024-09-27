@@ -20,6 +20,7 @@ export const getMessages =async(modelInfo, data)=>{
         
         const resData = await api.fetchMessages(modelInfo.model, matchTypeMap(modelInfo.personality), data);
         //const resData = await api.testApi();
+        console.log("resData---------->")
         console.log(resData)
         return JSON.stringify(resData.data) 
     } catch (error) {
