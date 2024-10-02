@@ -59,12 +59,13 @@ const ParamsArea = ({curModelInfo, setCurModelInfo, versionCode, setModelParams}
     "Qwen1.5-4B-Chat":"cuda:7",
     "Qwen1.5-4B-Chat-AWQ":"cuda:1",
 }
-  const model_list2 = [ {"glm-3-turbo":["智谱AI", "zhipuai"]},
-                        {"glm-4":["智谱AI", "zhipuai"]} , 
-                        {"Baichuan2-53B":["百川","baichuan"]}, 
-                        {"Baichuan2":["百川","baichuan"]},
-                        {"abab5.5s-chat": ["MiniMax", "minimax"]},
-                        {"abab5.5-chat":["MiniMax", "minimax"]}, 
+  const model_list2 = [ 
+                        // {"glm-3-turbo":["智谱AI", "zhipuai"]},
+                        // {"glm-4":["智谱AI", "zhipuai"]} , 
+                        // {"Baichuan2-53B":["百川","baichuan"]}, 
+                        // {"Baichuan2":["百川","baichuan"]},
+                        // {"abab5.5s-chat": ["MiniMax", "minimax"]},
+                        // {"abab5.5-chat":["MiniMax", "minimax"]}, 
                         {"Meta-llama3:8b":["llama3:8b", "llama3:8b"]} ]
   
   const personality_type = [

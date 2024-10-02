@@ -4,6 +4,7 @@ import { arrow, clearIcon } from '../assets'
 import MessageBox from './MessageBox';
 
 import { getMessages } from '../services/messages';
+import Eva from './Eva';
 
 const ChatArea = ({curModelInfo, modelParams}) => {
   
@@ -91,14 +92,21 @@ const ChatArea = ({curModelInfo, modelParams}) => {
 
   return (
     <div className="flex flex-col p-4 w-full h-screen bg-white">
+      
   {/* 标题 */}
-  <div className="bg-gray-800 text-white my-3 py-4 text-center text-xl font-semibold rounded">Chat with {curModelInfo.model} {curModelInfo.personality}</div>
+  <div className="bg-gray-800 text-white my-3 py-4 text-center text-xl font-semibold rounded flex">
+  <div className="flex items-center ml-4">
+    <Eva/>
+  </div>
+  <div className="text-center flex-grow">
+    Chat with {curModelInfo.model} {curModelInfo.personality}
+  </div>
+</div>
   
   {/* 聊天消息框 */}
   
   {/* flex-1：铺满剩余区域 */}
   <MessageBox messages={allMessages}/>
-  
  
   
   {/* 回复消息输入框 */}
